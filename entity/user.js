@@ -3,6 +3,5 @@
  */
 module.exports = {
     name:"user",
-    id:"id",
 
 };
