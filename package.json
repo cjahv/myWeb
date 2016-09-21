@@ -13,6 +13,6 @@
     "jade": "latest",
     "morgan": "latest",
     "serve-favicon": "latest",
-    "sqlite3": "latest"
+    "mysql":"latest"
   }
 }
