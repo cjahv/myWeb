@@ -10,9 +10,11 @@
     "cookie-parser": "latest",
     "debug": "latest",
     "express": "latest",
-    "jade": "latest",
+    "pug": "latest",
     "morgan": "latest",
     "serve-favicon": "latest",
-    "mysql":"latest"
+    "mysql": "latest",
+    "underscore": "latest",
+    "md5": "latest"
   }
 }

@@ -10,14 +10,22 @@ var pool = mysql.createPool($db_conf.mysql);
 
 module.exports = {
     /**
+     * This callback type is called `requestCallback` and is displayed as a global symbol.
+     *
+     * @callback getConnectionCallback
+     * @param {PoolConnection} connection
+     */
+
+    /**
      * 获取conn
-     * @param {function(connection)} callback
+     * @param {getConnectionCallback} callback
      */
     exec: function (callback) {
         pool.getConnection(function (err, connection) {
             if (!!err) {
                 console.error("dbError:" + err);
             } else if ("function" === typeof callback) {
+                // connection.connect();
                 callback(connection);
                 connection.release();
             }

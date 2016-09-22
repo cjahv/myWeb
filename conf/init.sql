@@ -23,7 +23,7 @@ CREATE TABLE web_users (
   password     CHAR(32)                        NOT NULL
   COMMENT '密码\n使用秘钥和原密码进行md5加密',
   header_image INT(11) UNSIGNED COMMENT '用户头像id url不存在时,使用默认头像路径与id拼接',
-  last_login   TIMESTAMP NOT NULL DEFAULT current_timestamp
+  last_login   TIMESTAMP                       NOT NULL DEFAULT current_timestamp
   COMMENT '用户最后登录时间\n由程序写入',
   UNIQUE KEY id(id),
   FOREIGN KEY (header_image) REFERENCES web_users_headers (id)
@@ -59,3 +59,14 @@ CREATE TABLE web_articles (
 
 INSERT INTO web_articles (parent_id, title, content, create_user)
 VALUES (NULL, '欢迎使用', '这是第一篇文章', 1), (1, NULL, '谢谢', 1);
+
+CREATE TABLE web_config (
+  id    INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
+  `key` VARCHAR(255)                    NOT NULL
+  COMMENT '参数键',
+  value VARCHAR(1024) COMMENT '参数值',
+  UNIQUE id(id)
+)
+  COMMENT '系统参数表';
+
+INSERT INTO web_config (`key`, value) VALUES ('web.title', '郝都闲人的博客'), ('system.title', '郝都闲人');
