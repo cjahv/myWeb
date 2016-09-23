@@ -40,16 +40,18 @@ CREATE TABLE web_articles (
   COMMENT '文章标题',
   content         TEXT                            NOT NULL
   COMMENT '文章内容',
-  click           INT(11) UNSIGNED                NOT NULL DEFAULT 0
+  click           INT(11) UNSIGNED                NOT NULL        DEFAULT 0
   COMMENT '点击量',
-  click_pv        INT(11) UNSIGNED                NOT NULL DEFAULT 0
+  click_pv        INT(11) UNSIGNED                NOT NULL        DEFAULT 0
   COMMENT 'pv量',
   create_user     INT(11) UNSIGNED COMMENT '创建用户id',
-  create_datetime TIMESTAMP                       NOT NULL DEFAULT current_timestamp
+  create_datetime TIMESTAMP                       NOT NULL        DEFAULT current_timestamp
   COMMENT '创建时间',
   change_user     INT(11) UNSIGNED COMMENT '修改用户id',
-  change_datetime TIMESTAMP                                DEFAULT 0 ON UPDATE current_timestamp
+  change_datetime DATETIME DEFAULT NULL
   COMMENT '修改时间',
+  discuss         INT(11) UNSIGNED                NOT NULL        DEFAULT 0
+  COMMENT '评论数量',
   UNIQUE id(id),
   FOREIGN KEY (parent_id) REFERENCES web_articles (id),
   FOREIGN KEY (create_user) REFERENCES web_users (id),

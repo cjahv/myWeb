@@ -13,7 +13,7 @@ a:hover {
 }
 
 body {
-    background: @color-body-back;
+    background-color: @color-body-back;
     color: @color-body;
     font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-size: 14px;
@@ -70,74 +70,94 @@ body {
         }
     }
 
-    section {
-        position: relative;
-        margin: 20% auto 0;
-        width: 80%;
+    .container {
+        background-color: @color-body-back;
 
-        article {
+        section {
             position: relative;
-            z-index: 500;
-            text-align: center;
+            margin: 20% auto 0;
+            width: 80%;
+            background-color: @color-body-back;
+            min-height: 1%;
 
-            .title {
-                font-size: 30px;
-                text-align: center;
-                word-break: break-word;
-                font-weight: normal;
-            }
-
-            .post-meta {
-                margin: 3px 0 60px 0;
-                color: @color-show;
-                font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
-                font-size: 12px;
+            article {
+                position: relative;
+                z-index: 500;
                 text-align: center;
 
-                > span:after {
-                    content: '|';
-                    margin: 0 10px;
+                .title {
+                    font-size: 30px;
+                    text-align: center;
+                    word-break: break-word;
+                    font-weight: normal;
+                    cursor: pointer;
                 }
-                > span:last-child:after {
-                    content: '';
+
+                .post-meta {
+                    margin: 3px 0 60px 0;
+                    color: @color-show;
+                    font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
+                    font-size: 12px;
+                    text-align: center;
+
+                    .post-time:before{
+                        content: '发表于 ';
+                    }
+
+                    .post-comments-count:after{
+                        content: '条评论';
+                    }
+
+                    .leancloud_visitors:before{
+                        content: '阅读次数';
+                    }
+                }
+
+                .post-body {
+                    text-indent: 2em;
+                    text-align: left;
+
+                    p {
+                        margin: 0 0 25px 0;
+                        line-height: 2;
+                    }
+                }
+
+                footer {
+                    margin: 80px auto 60px;
+                    width: 8%;
+                    border-top: 1px solid @color-show+#333;
                 }
             }
+        }
 
-            .post-body {
-                text-indent: 2em;
-                text-align: left;
-
-                p {
-                    margin: 0 0 25px 0;
-                    line-height: 2;
-                }
+        .blurry-block {
+            .block-top {
+                position: fixed;
+                top: 0;
+                left: 0;
+                z-index: 800;
+                width: 100%;
+                height: 45px;
+                margin-top: -45px;
+                background: @color-body-back;
+                box-shadow: 0 48px 70px 100px @color-body-back;
             }
 
-            footer {
-                margin: 80px auto 60px;
-                width: 8%;
-                border-top: 1px solid #ccc;
+            .block-bottom {
+                &:extend(body .container .blurry-block .block-top);
+                top: auto;
+                bottom: 0;
             }
         }
     }
 
-    .blurry-block {
-        .block-top {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 800;
-            width: 100%;
-            height: 20%;
-            background: @color-body-back;
-            background: linear-gradient(to bottom, @color-body-back 30%, transparent);
-        }
-
-        .block-bottom {
-            &:extend(body .blurry-block .block-top);
-            top: auto;
-            bottom: 0;
-            background: linear-gradient(to top, @color-body-back 30%, transparent);
-        }
+    > footer {
+        position: fixed;
+        bottom: 0;
+        z-index: 900;
+        width: 100%;
+        text-align: center;
+        color: @color-show;
     }
 }

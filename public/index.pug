@@ -3,139 +3,24 @@ extends view/model/layout
 block content
     .container
         section
-            article
+            article.hidden#article
                 header
-                    h1.title 使用 Travis CI 自动更新 GitHub Pages
+                    h1.title
                     nav.post-meta
                         span.post-time
-                            span.post-meta-item-text 发表于
-                            time(datetime="2016-03-22T13:04:35+08:00") 2016-03-22
-                        span.post-comments-count 109条评论
+                            time
+                        =" | "
+                        span.post-comments-count
+                        =" | "
                         span.leancloud_visitors
-                            span.post-meta-item-text 阅读次数
-                            span.leancloud-visitors-count 11098
+                            span.leancloud-visitors-count
                 .post-body
-                    p
-                        | 每次更改完
-                        a NexT 文档
-                        | 都要手动部署到 GitHub Pages，重复的次数多了就显得很麻烦，出错的几率也会变大。文档源码放置在 master 分支，最终部署文件在 gh-pages 分支。当在 master 分支更改某些内容之后，通过运行 gulp dist 来生成最终部署的 HTML 文件到 dist 目录，随后再进入 dist 目录初始化 git 仓库、添加文件、提交文件，最后将提交强制推送到远程 gh-pages 分支（因当心我会误将最终部署的 HTML 文件提交到 master 分支导致源码丢失，我在 GitHub 上把 master 分支给锁定了）。除此之外还有另外一个问题：如果 master 分支有 Pull Requests，我需要先将更新取回本地，然后编译更新再提交回远程 gh-pages 分支。
                 .post-more-link
                     button 阅读全文
                 footer
-            article
-                header
-                    h1.title 使用 Travis CI 自动更新 GitHub Pages
-                    nav.post-meta
-                        span.post-time
-                            span.post-meta-item-text 发表于
-                            time(datetime="2016-03-22T13:04:35+08:00") 2016-03-22
-                        span.post-comments-count 109条评论
-                        span.leancloud_visitors
-                            span.post-meta-item-text 阅读次数
-                            span.leancloud-visitors-count 11098
-                .post-body
-                    p
-                        | 每次更改完
-                        a NexT 文档
-                        | 都要手动部署到 GitHub Pages，重复的次数多了就显得很麻烦，出错的几率也会变大。文档源码放置在 master 分支，最终部署文件在 gh-pages 分支。当在 master 分支更改某些内容之后，通过运行 gulp dist 来生成最终部署的 HTML 文件到 dist 目录，随后再进入 dist 目录初始化 git 仓库、添加文件、提交文件，最后将提交强制推送到远程 gh-pages 分支（因当心我会误将最终部署的 HTML 文件提交到 master 分支导致源码丢失，我在 GitHub 上把 master 分支给锁定了）。除此之外还有另外一个问题：如果 master 分支有 Pull Requests，我需要先将更新取回本地，然后编译更新再提交回远程 gh-pages 分支。
-                .post-more-link
-                    button 阅读全文
-                footer
-            article
-                header
-                    h1.title 使用 Travis CI 自动更新 GitHub Pages
-                    nav.post-meta
-                        span.post-time
-                            span.post-meta-item-text 发表于
-                            time(datetime="2016-03-22T13:04:35+08:00") 2016-03-22
-                        span.post-comments-count 109条评论
-                        span.leancloud_visitors
-                            span.post-meta-item-text 阅读次数
-                            span.leancloud-visitors-count 11098
-                .post-body
-                    p
-                        | 每次更改完
-                        a NexT 文档
-                        | 都要手动部署到 GitHub Pages，重复的次数多了就显得很麻烦，出错的几率也会变大。文档源码放置在 master 分支，最终部署文件在 gh-pages 分支。当在 master 分支更改某些内容之后，通过运行 gulp dist 来生成最终部署的 HTML 文件到 dist 目录，随后再进入 dist 目录初始化 git 仓库、添加文件、提交文件，最后将提交强制推送到远程 gh-pages 分支（因当心我会误将最终部署的 HTML 文件提交到 master 分支导致源码丢失，我在 GitHub 上把 master 分支给锁定了）。除此之外还有另外一个问题：如果 master 分支有 Pull Requests，我需要先将更新取回本地，然后编译更新再提交回远程 gh-pages 分支。
-                .post-more-link
-                    button 阅读全文
-                footer
-            article
-                header
-                    h1.title 使用 Travis CI 自动更新 GitHub Pages
-                    nav.post-meta
-                        span.post-time
-                            span.post-meta-item-text 发表于
-                            time(datetime="2016-03-22T13:04:35+08:00") 2016-03-22
-                        span.post-comments-count 109条评论
-                        span.leancloud_visitors
-                            span.post-meta-item-text 阅读次数
-                            span.leancloud-visitors-count 11098
-                .post-body
-                    p
-                        | 每次更改完
-                        a NexT 文档
-                        | 都要手动部署到 GitHub Pages，重复的次数多了就显得很麻烦，出错的几率也会变大。文档源码放置在 master 分支，最终部署文件在 gh-pages 分支。当在 master 分支更改某些内容之后，通过运行 gulp dist 来生成最终部署的 HTML 文件到 dist 目录，随后再进入 dist 目录初始化 git 仓库、添加文件、提交文件，最后将提交强制推送到远程 gh-pages 分支（因当心我会误将最终部署的 HTML 文件提交到 master 分支导致源码丢失，我在 GitHub 上把 master 分支给锁定了）。除此之外还有另外一个问题：如果 master 分支有 Pull Requests，我需要先将更新取回本地，然后编译更新再提交回远程 gh-pages 分支。
-                .post-more-link
-                    button 阅读全文
-                footer
-            article
-                header
-                    h1.title 使用 Travis CI 自动更新 GitHub Pages
-                    nav.post-meta
-                        span.post-time
-                            span.post-meta-item-text 发表于
-                            time(datetime="2016-03-22T13:04:35+08:00") 2016-03-22
-                        span.post-comments-count 109条评论
-                        span.leancloud_visitors
-                            span.post-meta-item-text 阅读次数
-                            span.leancloud-visitors-count 11098
-                .post-body
-                    p
-                        | 每次更改完
-                        a NexT 文档
-                        | 都要手动部署到 GitHub Pages，重复的次数多了就显得很麻烦，出错的几率也会变大。文档源码放置在 master 分支，最终部署文件在 gh-pages 分支。当在 master 分支更改某些内容之后，通过运行 gulp dist 来生成最终部署的 HTML 文件到 dist 目录，随后再进入 dist 目录初始化 git 仓库、添加文件、提交文件，最后将提交强制推送到远程 gh-pages 分支（因当心我会误将最终部署的 HTML 文件提交到 master 分支导致源码丢失，我在 GitHub 上把 master 分支给锁定了）。除此之外还有另外一个问题：如果 master 分支有 Pull Requests，我需要先将更新取回本地，然后编译更新再提交回远程 gh-pages 分支。
-                .post-more-link
-                    button 阅读全文
-                footer
-            article
-                header
-                    h1.title 使用 Travis CI 自动更新 GitHub Pages
-                    nav.post-meta
-                        span.post-time
-                            span.post-meta-item-text 发表于
-                            time(datetime="2016-03-22T13:04:35+08:00") 2016-03-22
-                        span.post-comments-count 109条评论
-                        span.leancloud_visitors
-                            span.post-meta-item-text 阅读次数
-                            span.leancloud-visitors-count 11098
-                .post-body
-                    p
-                        | 每次更改完
-                        a NexT 文档
-                        | 都要手动部署到 GitHub Pages，重复的次数多了就显得很麻烦，出错的几率也会变大。文档源码放置在 master 分支，最终部署文件在 gh-pages 分支。当在 master 分支更改某些内容之后，通过运行 gulp dist 来生成最终部署的 HTML 文件到 dist 目录，随后再进入 dist 目录初始化 git 仓库、添加文件、提交文件，最后将提交强制推送到远程 gh-pages 分支（因当心我会误将最终部署的 HTML 文件提交到 master 分支导致源码丢失，我在 GitHub 上把 master 分支给锁定了）。除此之外还有另外一个问题：如果 master 分支有 Pull Requests，我需要先将更新取回本地，然后编译更新再提交回远程 gh-pages 分支。
-                .post-more-link
-                    button 阅读全文
-                footer
-            article
-                header
-                    h1.title 使用 Travis CI 自动更新 GitHub Pages
-                    nav.post-meta
-                        span.post-time
-                            span.post-meta-item-text 发表于
-                            time(datetime="2016-03-22T13:04:35+08:00") 2016-03-22
-                        span.post-comments-count 109条评论
-                        span.leancloud_visitors
-                            span.post-meta-item-text 阅读次数
-                            span.leancloud-visitors-count 11098
-                .post-body
-                    p
-                        | 每次更改完
-                        a NexT 文档
-                        | 都要手动部署到 GitHub Pages，重复的次数多了就显得很麻烦，出错的几率也会变大。文档源码放置在 master 分支，最终部署文件在 gh-pages 分支。当在 master 分支更改某些内容之后，通过运行 gulp dist 来生成最终部署的 HTML 文件到 dist 目录，随后再进入 dist 目录初始化 git 仓库、添加文件、提交文件，最后将提交强制推送到远程 gh-pages 分支（因当心我会误将最终部署的 HTML 文件提交到 master 分支导致源码丢失，我在 GitHub 上把 master 分支给锁定了）。除此之外还有另外一个问题：如果 master 分支有 Pull Requests，我需要先将更新取回本地，然后编译更新再提交回远程 gh-pages 分支。
-                .post-more-link
-                    button 阅读全文
-                footer
-        .blurry-block
+        section.blurry-block
             .block-top
             .block-bottom
+    footer Copyright © 2016 - #{new Date().getFullYear()} cJahv. All Rights Reserved.
+block script
+    script(src="/public/javascripts/index.js")
