@@ -25,7 +25,7 @@ app.use("/public", function (req, res, next) {
 app.use("/public", express.static(path.join(__dirname, 'public')));
 
 app.use("/", function (req, res, next) {
-    res.redirect(301, "public/index.html");
+    if(req.url==="/")res.redirect(301, "public/index.html");
 });
 
 app.use(function (req, res, next) {

@@ -1,8 +1,67 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+a {
+  text-decoration: none;
+  color: #258fb8;
+}
+a:hover {
+  text-decoration: underline;
 }
 
-a {
-  color: #00B7FF;
+body {
+  background: #eee;
+  color: #444;
+  font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+  font-size: 14px;
+
+  >header {
+    position: fixed;
+    width: 100%;
+    text-shadow: 0 0 1px #fff;
+    margin: 50px auto;
+    padding:0 20px;
+
+    .logo{
+      float: left;
+    }
+
+    a{
+      color: #999;
+    }
+
+    a:hover{
+      color: #258fb8;
+      text-decoration: none;
+    }
+
+    nav{
+      font-family: "Lato", Helvetica Neue, Helvetica, Arial, sans-serif;
+      line-height: 2.5em;
+
+      >ul{
+        list-style-type:none;
+
+        >li{
+          float: left;
+          margin: 0 15px;
+        }
+      }
+    }
+  }
+
+  section{
+    margin: 20% auto 0;
+    width: 80%;
+
+    article{
+      text-align: center;
+
+      .title{
+        font-weight: normal;
+      }
+
+      .post-body{
+        text-indent: 2em;
+        text-align: left;
+      }
+    }
+  }
 }

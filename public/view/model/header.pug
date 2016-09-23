@@ -1,1 +1,10 @@
-h1 头部
+header
+    .logo
+        h1
+            a(href="/") 郝都闲人
+    nav.pull-right
+        ul
+            - var navList=['首页','关于我']
+            each item in navList
+                li
+                    a(href="") #{item}
