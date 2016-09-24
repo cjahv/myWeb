@@ -21,6 +21,7 @@ $(document).on("mousedown", "section>article", function (e) {
     }
 }).on("click", "header .article-close", function () {
     if (articleId !== false) {
+        Web.changeUrl("/public/index.html#article-"+articleId);
         $('body').removeClass("article");
         article[articleId].hide();
         $("#article-" + articleId).siblings('article').show().end().find(".post-more-link,footer").show();
@@ -44,6 +45,10 @@ function scrollLoad() {
                 Web.generate.article.call($article, v).appendTo($section);
             });
             load_more = false;
+            if(location.hash) {
+                $(document).scrollTop($(location.hash).offset().top-$(window).height()*.2);
+                Web.changeUrl(location.pathname);
+            }
         });
     }
 }
