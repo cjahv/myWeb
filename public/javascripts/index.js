@@ -32,6 +32,7 @@ $(document).on("mousedown", "section>article", function (e) {
 });
 
 function scrollLoad() {
+    if($('body').is(".article"))return;
     if (load_more === false && $(window).scrollTop() + $(window).height() == $(document).height()) {
         load_more = true;
         var $load = $('<div class="loader-inner triangle-skew-spin"></div>').appendTo($section).loaders();
