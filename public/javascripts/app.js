@@ -4,7 +4,7 @@
 var Web = {
     generate:{
         article:function (data) {
-            var article = this.clone().removeClass("hidden");
+            var article = this.clone().removeClass("hide");
             article.find(".title").text(data.title);
             article.find("time").text(data.create_datetime.substring(0,data.create_datetime.indexOf('T')))
                 .attr("datetime",data.create_datetime);
@@ -16,7 +16,7 @@ var Web = {
             return article.attr("id", "article-" + data.id);
         }
     },
-    changeUrl:function (url, search) {
+    changeUrl:function (url, search,title) {
         if (/^(https?:)?\/\/.*/.test(url))return;
         var path = location.pathname;
         if (url.indexOf("?") > 0) {
@@ -63,6 +63,6 @@ var Web = {
         if (search) {
             href += search;
         }
-        window.history.pushState({}, 0, href)
+        window.history.pushState({}, title, href)
     }
 };

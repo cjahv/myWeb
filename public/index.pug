@@ -1,23 +1,29 @@
 extends view/model/layout
 
+mixin article(item)
+    article(id="article" + (item.id ? "-" + item.id : ""),class=item.id ? "" : "hide")
+        header
+            h1.title #{item.title}
+            nav.post-meta
+                span.post-time
+                    time #{item.create_datetime}
+                =" | "
+                span.post-comments-count #{item.discuss}
+                =" | "
+                span.leancloud_visitors
+                    span.leancloud-visitors-count #{item.click}
+        .post-body !{item.content}
+        .post-more-link(class=item.id ? "hide" : "")
+            button 阅读全文
+        footer(class=item.id ? "hide" : "")
+
 block content
     .container
         section
-            article.hidden#article
-                header
-                    h1.title
-                    nav.post-meta
-                        span.post-time
-                            time
-                        =" | "
-                        span.post-comments-count
-                        =" | "
-                        span.leancloud_visitors
-                            span.leancloud-visitors-count
-                .post-body
-                .post-more-link
-                    button 阅读全文
-                footer
+            +article({})
+            - var list=data||[];
+            each item in list
+                +article(item)
         section.blurry-block
             .block-top
             .block-bottom

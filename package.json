@@ -10,11 +10,15 @@
     "cookie-parser": "latest",
     "debug": "latest",
     "express": "latest",
-    "pug": "latest",
+    "md5": "latest",
+    "moment": "^2.15.1",
     "morgan": "latest",
-    "serve-favicon": "latest",
     "mysql": "latest",
-    "underscore": "latest",
-    "md5": "latest"
+    "pug": "latest",
+    "serve-favicon": "latest",
+    "underscore": "latest"
+  },
+  "devDependencies": {
+    "babel-plugin-uglify": "^1.0.2"
   }
 }

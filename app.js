@@ -1,18 +1,19 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var routes = require('./routes/index');
-var app = express();
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const app = express();
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
-app.use(/^.*?\.json$/, routes);
+app.use("**.json", require('./routes/index'));
+
+app.use("/public/article/:id.html", require('./routes/article.jsx'));
 
 app.use("/public", function (req, res, next) {
     if (/^.*?\.(pug|less)$/.test(req.url) || req.url.indexOf("/view/model") === 0) {

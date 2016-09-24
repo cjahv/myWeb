@@ -5,8 +5,10 @@ var $article = $('#article');
 
 var $section = $article.parent();
 
-var articleClick = false, articleId = false, article = {}, articleScrollTop = 0;
+var articleClick = false, article = {}, articleScrollTop = 0,startArticleId=0;
 var load_more = false;
+
+var title = $("head title").text();
 $(document).on("mousedown", "section>article", function (e) {
     if (!getSelection().toString()) {
         articleClick = [e.clientX, e.clientY];
@@ -20,11 +22,16 @@ $(document).on("mousedown", "section>article", function (e) {
         }
     }
 }).on("click", "header .article-close", function () {
-    if (articleId !== false) {
-        Web.changeUrl("/public/index.html#article-"+articleId);
-        $('body').removeClass("article");
+    var articleId = parseInt(location.pathname.substring(16, location.pathname.lastIndexOf('.')));
+    Web.changeUrl("/public/index.html#article-"+articleId);
+    $('body').removeClass("article");
+    var $this=$("#article-" + articleId).siblings('article').show().end().find(".post-more-link,footer").show().end();
+    if(!article[articleId]){
+        $this.remove();
+        startArticleId = articleId - 2;
+        scrollLoad();
+    }else{
         article[articleId].hide();
-        $("#article-" + articleId).siblings('article').show().end().find(".post-more-link,footer").show();
         $(document).scrollTop(articleScrollTop);
         setTimeout(function () {
             $(document).scrollTop(articleScrollTop);
@@ -38,7 +45,7 @@ function scrollLoad() {
         load_more = true;
         var $load = $('<div class="loader-inner triangle-skew-spin"></div>').appendTo($section).loaders();
         var last_id = $section.find(">article:last").data("id");
-        $.get("select.article.simple.json", {id: last_id || 0}, function (d) {
+        $.get("select.article.simple.json", {id: last_id || startArticleId}, function (d) {
             $load.remove();
             if (!d.length)return window.removeEventListener("scroll",scrollLoad);
             $.each(d, function (i, v) {
@@ -61,9 +68,10 @@ function onClickArticle() {
     articleScrollTop = $(document).scrollTop();
     $('body').addClass("article");
     var $this = $(this), id = $this.siblings("article").hide().end().data("id"), load = false, $load;
-    Web.changeUrl("/public/article/"+id+".html");
+    var _title = $this.find(".title").text();
+    Web.changeUrl("/public/article/"+id+".html",false);
+    document.title = `${_title}${title}`;
     $(document).scrollTop(0);
-    articleId = id;
     if (article[id]) {
         $this.find(".post-more-link,footer").hide();
         article[id].show();
