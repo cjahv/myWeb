@@ -37,10 +37,10 @@ $(document).on("mousedown", "section>article", function (e) {
             $(document).scrollTop(articleScrollTop);
         }, 200);
     }
+    load_more = false;
 });
 
 function scrollLoad() {
-    if($('body').is(".article"))return;
     if (load_more === false && $(window).scrollTop() + $(window).height() == $(document).height()) {
         load_more = true;
         var $load = $('<div class="loader-inner triangle-skew-spin"></div>').appendTo($section).loaders();
@@ -66,6 +66,7 @@ window.addEventListener("scroll", scrollLoad);
 
 function onClickArticle() {
     articleScrollTop = $(document).scrollTop();
+    load_more = true;
     $('body').addClass("article");
     var $this = $(this), id = $this.siblings("article").hide().end().data("id"), load = false, $load;
     var _title = $this.find(".title").text();
