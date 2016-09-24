@@ -20,6 +20,9 @@ var $conn = require('../utils/dbConn');
 //     res.send("1");
 // });
 
+var error = new Error("server error!");
+error.statusCode = 500;
+
 var _dao = {
     select: function (sql, values, fn) {
         if (typeof values === "function") {
@@ -35,28 +38,50 @@ var _dao = {
     }
 };
 
+var cache = {
+    val:{},
+    get:function (key) {
+        return cache.val[key];
+    },
+    set:function (key, val) {
+        return cache.val[key] = val;
+    }
+};
+
 var _action = {
     select: {
         article: {
             simple: function (req, res, next) {
-                var page = req.query.page;
-                var start = page * 5 - 5;
-                _dao.select("select id,title,content,click,create_datetime,discuss \
+                var id = req.query.id;
+                _dao.select("select id,title,content,content_split,click,create_datetime,discuss \
                     from web_articles \
-                    where parent_id is null \
-                    order by create_datetime desc limit ?,5",
-                    [start],
+                    where parent_id is null and id > ?\
+                    limit 5",
+                    [id],
                     function (data) {
                         if (data !== null) {
+                            for (var i = 0; i < data.length; i++) {
+                                var split = data[i].content_split;
+                                var content = data[i].content;
+                                if(split) {
+                                    data[i].content = content.substring(0, split);
+                                    cache.set("article:other_content:" + data[i].id, content.substring(split));
+                                }
+                            }
                             res.send(data)
                         }
                     })
+            },
+            remaining:function (req, res, next) {
+                var id=parseInt(req.query.id);
+                if(isNaN(id))next(error);
+                else res.send(cache.get("article:other_content:" + id))
             }
         }
     }
 };
 
 module.exports = function (req, res, next) {
-    var action = req.baseUrl.substring(1, req.baseUrl.lastIndexOf('.'));
+    var action = req.baseUrl.substring(req.baseUrl.lastIndexOf('/')+1, req.baseUrl.lastIndexOf('.'));
     eval('_action.' + action + '(req,res,next)');
 };

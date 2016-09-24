@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var app = express();
-// app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -25,7 +25,7 @@ app.use("/public", function (req, res, next) {
 app.use("/public", express.static(path.join(__dirname, 'public')));
 
 app.use("/", function (req, res, next) {
-    if(req.url==="/")res.redirect(301, "public/index.html");
+    if (req.url === "/")res.redirect(301, "public/index.html");
     else next();
 });
 

@@ -4,7 +4,10 @@ header
             a(href="/") 郝都闲人
     nav.pull-right
         ul
-            - var navList=['首页','关于我']
-            each item in navList
-                li
-                    a(href="") #{item}
+            -var _href="javascript:void(0)"
+            li.about
+                a(href=_href) 关于
+                    span.icon.icon-about
+            li.article-close
+                a(href=_href)
+                    span.icon.icon-close
