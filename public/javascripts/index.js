@@ -56,6 +56,7 @@ function onClickArticle() {
     articleScrollTop = $(document).scrollTop();
     $('body').addClass("article");
     var $this = $(this), id = $this.siblings("article").hide().end().data("id"), load = false, $load;
+    Web.changeUrl("/public/article/"+id+".html");
     $(document).scrollTop(0);
     articleId = id;
     if (article[id]) {

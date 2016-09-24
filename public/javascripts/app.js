@@ -15,5 +15,54 @@ var Web = {
             article.data("id", data.id);
             return article.attr("id", "article-" + data.id);
         }
+    },
+    changeUrl:function (url, search) {
+        if (/^(https?:)?\/\/.*/.test(url))return;
+        var path = location.pathname;
+        if (url.indexOf("?") > 0) {
+            var urls = url.split("?", 2);
+            url = urls[0];
+            if (search !== false)search = "?" + urls[1];
+        }
+        if (url.charAt(0) == "/") {
+            path = url;
+        } else {
+            var x = url.split("/");
+            var p = path.split("/");
+            delete p[0];
+            delete p[p.length - 1];
+            var len = p.length;
+            for (var i = 0; i < x.length; i++) {
+                if (x[i] === "..") {
+                    for (var j = len - 1; j >= 0; j--) {
+                        if (p[j] !== undefined) {
+                            delete p[j];
+                            break;
+                        }
+                    }
+                } else if (x[i] !== ".") {
+                    p[len++] = x[i];
+                }
+            }
+            var tmp = [];
+            for (i = 0; i < len; i++) {
+                if (p[i] !== undefined) {
+                    tmp.push(p[i]);
+                }
+            }
+            path = "/" + tmp.join("/");
+        }
+        var origin = location.origin;
+        if (!origin) {
+            origin = location.protocol + "//" + location.host;
+        }
+        if (search !== false && !search) {
+            search = location.search;
+        }
+        var href = origin + path;
+        if (search) {
+            href += search;
+        }
+        window.history.pushState({}, 0, href)
     }
 };
