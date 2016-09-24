@@ -17,8 +17,5 @@
     "pug": "latest",
     "serve-favicon": "latest",
     "underscore": "latest"
-  },
-  "devDependencies": {
-    "babel-plugin-uglify": "^1.0.2"
   }
 }
