@@ -16,9 +16,31 @@ $(document).on("mousedown", "section>article", function (e) {
         articleClick = false;
     }
 }).on("mouseup", "section>article", function (e) {
+    if(document.body.className.indexOf('article')>=0)return;
     if (articleClick !== false) {
         if (e.clientX === articleClick[0] && e.clientY === articleClick[1]) {
-            onClickArticle.call(this);
+            articleScrollTop = $(document).scrollTop();
+            load_more = true;
+            $('body').addClass("article");
+            var $this = $(this), id = $this.siblings("article").hide().end().data("id"), $load = false;
+            var _title = $this.find(".title").text();
+            Web.changeUrl("/public/article/" + id + ".html", false);
+            document.title = `${_title} - ${title}`;
+            $(document).scrollTop(0);
+            if (article[id]) {
+                $this.find(".post-more-link,footer").hide();
+                article[id].show();
+                return;
+            }
+            $.get("select.article.remaining.json", {id: id}, function (d) {
+                if ($load) $load.remove();
+                $load = true;
+                article[id] = $(d).appendTo($this.find(".post-body"));
+            });
+            setTimeout(function () {
+                $this.find(".post-more-link,footer").hide();
+                if ($load === false)$load = $('<div class="loader-inner triangle-skew-spin"></div>').appendTo($this).loaders();
+            }, 200);
         }
     }
 }).on("click", "body.article header .article-close", function () {
@@ -39,6 +61,10 @@ $(document).on("mousedown", "section>article", function (e) {
         }, 200);
     }
     load_more = false;
+}).on("mouseup","header .logo",function () {
+    if(getSelection().focusNode.nodeValue===title) {
+        Web.login("/public/admin/index.html");
+    }
 });
 
 function scrollLoad() {
@@ -65,28 +91,3 @@ function scrollLoad() {
 scrollLoad();
 
 window.addEventListener("scroll", scrollLoad);
-
-function onClickArticle() {
-    articleScrollTop = $(document).scrollTop();
-    load_more = true;
-    $('body').addClass("article");
-    var $this = $(this), id = $this.siblings("article").hide().end().data("id"), $load = false;
-    var _title = $this.find(".title").text();
-    Web.changeUrl("/public/article/" + id + ".html", false);
-    document.title = `${_title} - ${title}`;
-    $(document).scrollTop(0);
-    if (article[id]) {
-        $this.find(".post-more-link,footer").hide();
-        article[id].show();
-        return;
-    }
-    $.get("select.article.remaining.json", {id: id}, function (d) {
-        if ($load) $load.remove();
-        $load = true;
-        article[id] = $(d).appendTo($this.find(".post-body"));
-    });
-    setTimeout(function () {
-        $this.find(".post-more-link,footer").hide();
-        if ($load === false)$load = $('<div class="loader-inner triangle-skew-spin"></div>').appendTo($this).loaders();
-    }, 200);
-}

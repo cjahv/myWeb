@@ -2,21 +2,45 @@
  * Created by jahv on 2016/9/22.
  */
 var Web = {
-    generate:{
-        article:function (data) {
+    generate: {
+        article: function (data) {
             var article = this.clone().removeClass("hide");
             article.find(".title").text(data.title);
-            article.find("time").text(data.create_datetime.substring(0,data.create_datetime.indexOf('T')))
-                .attr("datetime",data.create_datetime);
+            article.find("time").text(data.create_datetime.substring(0, data.create_datetime.indexOf('T')))
+                .attr("datetime", data.create_datetime);
             article.find(".post-comments-count").text(data.discuss);
             article.find(".leancloud-visitors-count").text(data.click);
             article.find(".post-body").html(data.content);
-            if(!data.content_split)article.find(".post-more-link").remove();
+            if (!data.content_split)article.find(".post-more-link").remove();
             article.data("id", data.id);
             return article.attr("id", "article-" + data.id);
         }
     },
-    changeUrl:function (url, search,title) {
+    getLogin: function (fn) {
+        var user = Cache.get("web:user");
+        if (!user) {
+            $.get("select.login.user.json", function (data) {
+                if (!data) {
+                    fn(false)
+                } else {
+                    Cache.set("web:user", data);
+                    fn(data);
+                }
+            })
+        } else {
+            fn(user);
+        }
+    },
+    login: function (url) {
+        Web.getLogin(function (user) {
+            if (!user) {
+
+            } else {
+                location.href = url;
+            }
+        })
+    },
+    changeUrl: function (url, search, title) {
         if (/^(https?:)?\/\/.*/.test(url))return;
         var path = location.pathname;
         if (url.indexOf("?") > 0) {
@@ -64,5 +88,15 @@ var Web = {
             href += search;
         }
         window.history.pushState({}, title, href)
+    }
+};
+
+var Cache = {
+    _value: {},
+    get: function (key) {
+        return Cache._value[key];
+    },
+    set: function (key, value) {
+        return Cache._value[key] = value;
     }
 };
