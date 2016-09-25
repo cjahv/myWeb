@@ -8,7 +8,7 @@ module.exports = {
     select: {
         article: {
             simple: function (req, res, next) {
-                var id = req.query.id;
+                var id = parseInt(req.query.id);
                 _dao.simple(id, function (data) {
                     res.send(data)
                 });

@@ -27,11 +27,13 @@ module.exports = {
         })
     },
     simple: function (id, fn, er) {
+        var idWhere = id === 0 ? "" : " and id < ?";
         $conn.select(
-            "select id,title,content,content_split,click,create_datetime,discuss \
-                    from web_articles \
-                    where parent_id is null and id > ?\
-                    limit 5",
+            `select id,title,content,content_split,click,create_datetime,discuss\
+                    from web_articles\
+                    where parent_id is null${idWhere}\
+                    order by id desc\
+                    limit 5`,
             [id],
             function (data) {
                 if (data !== null) {

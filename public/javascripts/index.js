@@ -8,7 +8,7 @@ var $section = $article.parent();
 var articleClick = false, article = {}, articleScrollTop = 0, startArticleId = 0;
 var load_more = false;
 
-var title = $("head title").text();
+var title = "郝都闲人";
 $(document).on("mousedown", "section>article", function (e) {
     if (!getSelection().toString()) {
         articleClick = [e.clientX, e.clientY];
@@ -21,14 +21,15 @@ $(document).on("mousedown", "section>article", function (e) {
             onClickArticle.call(this);
         }
     }
-}).on("click", "header .article-close", function () {
+}).on("click", "body.article header .article-close", function () {
     var articleId = parseInt(location.pathname.substring(16, location.pathname.lastIndexOf('.')));
     Web.changeUrl("/public/index.html#article-" + articleId);
+    document.title = title;
     $('body').removeClass("article");
     var $this = $("#article-" + articleId).siblings('article').show().end().find(".post-more-link,footer").show().end();
     if (!article[articleId]) {
         $this.remove();
-        startArticleId = articleId - 2;
+        startArticleId = articleId + 3;
         scrollLoad();
     } else {
         article[articleId].hide();
@@ -72,7 +73,7 @@ function onClickArticle() {
     var $this = $(this), id = $this.siblings("article").hide().end().data("id"), $load = false;
     var _title = $this.find(".title").text();
     Web.changeUrl("/public/article/" + id + ".html", false);
-    document.title = `${_title}${title}`;
+    document.title = `${_title} - ${title}`;
     $(document).scrollTop(0);
     if (article[id]) {
         $this.find(".post-more-link,footer").hide();
