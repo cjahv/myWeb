@@ -61,9 +61,10 @@ $(document).on("mousedown", "section>article", function (e) {
         }, 200);
     }
     load_more = false;
-}).on("mouseup","header .logo",function () {
-    if(getSelection().focusNode.nodeValue===title) {
+}).on("click","header .logo",function (e) {
+    if(e.ctrlKey||e.metaKey){
         Web.login("/public/admin/index.html");
+        return false;
     }
 });
 

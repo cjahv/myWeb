@@ -18,6 +18,11 @@ module.exports = {
                 if (isNaN(id))next(error);
                 else res.send(cache.get("article:other_content:" + id))
             }
+        },
+        login:{
+            user:function (req, res, next) {
+                res.send(req.session.user);
+            }
         }
     }
 };

@@ -3,6 +3,7 @@ const path = require('path');
 const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
+var session = require('express-session');
 const bodyParser = require('body-parser');
 const app = express();
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')));
@@ -10,6 +11,12 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use(session({
+    resave: false,
+    saveUninitialized: true,
+    secret: 'x5KoQx7l0q4L6IDFq7ihKdnHkhcwiBeH5FnPMGP8vH4rb3ir1vetz1CYefCLV5Loa5iBZGouLRwFzeMJmrJ5vFdfz22mgFhGXLk74ZLe3CdVg2IeMaGXVAjxuVH8x71n',
+    cookie: { maxAge: 1800000 }
+}));
 
 app.use("**.json", require('./routes/index'));
 

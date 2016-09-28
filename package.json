@@ -10,6 +10,7 @@
     "cookie-parser": "latest",
     "debug": "latest",
     "express": "latest",
+    "express-session": "^1.14.1",
     "md5": "latest",
     "moment": "^2.15.1",
     "morgan": "latest",
