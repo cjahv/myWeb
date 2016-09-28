@@ -27,6 +27,8 @@ block content
         section.blurry-block
             .block-top
             .block-bottom
-    footer Copyright © 2016 - #{new Date().getFullYear()} cJahv. All Rights Reserved.
+    - var start = 2016, now = new Date().getFullYear();
+    - var date = start <= now ? now: start + " - " + now;
+    footer Copyright &copy; #{date} haoduxianren. All Rights Reserved.
 block script
     script(src="/public/javascripts/index.js")

@@ -1,69 +1,68 @@
-@color-blue: #258fb8;
 @color-body: #444;
-@color-body-back: #eee;
 @color-show: #999;
+@color-article: #fff;
+@color-blue: #258fb8;
+@color-body-back: #eee;
 
-@color-article:#fff;
+@step-tran: .2s;
 
-@step-tran:.2s;
-
-.pre(@style,@value){
-    -webkit-@{style}: @value;
-    -moz-@{style}: @value;
-    -ms-@{style}: @value;
+.pre(@style,@value) {
         @{style}: @value;
+    -ms-@{style}: @value;
+    -moz-@{style}: @value;
+    -webkit-@{style}: @value;
 }
 
-.animation(@value){
-    .pre(animation,@value);
+.animation(@value) {
+    .pre(animation, @value);
 }
 
-.transition(@arg){
-    .pre(transition,@arg);
+.transition(@arg) {
+    .pre(transition, @arg);
 }
 
 a {
-    text-decoration: none;
     color: @color-blue;
+    text-decoration: none;
 
-    &:hover,&:focus {
-        text-decoration: none!important;
+    &:hover, &:focus {
+        text-decoration: none !important;
     }
 }
 
-:focus{
-    outline:none!important;
+:focus {
+    outline: none !important;
 }
 
 body {
-    background-color: @color-body-back;
-    color: @color-body;
-    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
     font-size: 14px;
+    color: @color-body;
+    background-color: @color-body-back;
     .transition(background-color @step-tran);
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
 
     > header {
 
         .logo {
-            position: fixed;
-            left: 50%;
             top: 50px;
-            margin-left: -678px;
+            left: 50%;
             z-index: 1000;
+            position: fixed;
+            margin-left: -678px;
             .transition(top @step-tran);
 
             @media screen {
-                @media (max-width: 1440px){
+                @media (max-width: 1440px) {
                     left: auto;
                     margin-left: 20px;
                 }
-                @media (max-width: 1024px){
+                @media (max-width: 1024px) {
                     top: 30px;
                 }
-                @media (max-width: 768px){
+                @media (max-width: 768px) {
                     top: 20px;
                 }
-                @media (max-width: 425px){
+                @media (max-width: 425px) {
                     top: 0;
                 }
             }
@@ -74,12 +73,12 @@ body {
             }
 
             a {
-                font-family: logo, sans-serif;
                 font-size: 39px;
                 line-height: 58px;
+                font-family: logo, sans-serif;
 
                 @media screen {
-                    @media (max-width: 425px){
+                    @media (max-width: 425px) {
                         line-height: 39px;
                     }
                 }
@@ -96,29 +95,29 @@ body {
         }
 
         nav {
-            position: fixed;
-            left: 50%;
             top: 50px;
-            margin-left: 520px;
+            left: 50%;
             z-index: 1000;
-            font-family: "Lato", Helvetica Neue, Helvetica, Arial, sans-serif;
+            position: fixed;
             line-height: 2.5em;
+            margin-left: 520px;
             .transition(top @step-tran);
+            font-family: "Lato", Helvetica Neue, Helvetica, Arial, sans-serif;
 
             @media screen {
-                @media (max-width: 1440px){
+                @media (max-width: 1440px) {
+                    right: 0;
                     left: auto;
                     margin-left: auto;
                     margin-right: 20px;
-                    right: 0;
                 }
-                @media (max-width: 1024px){
+                @media (max-width: 1024px) {
                     top: 30px;
                 }
-                @media (max-width: 768px){
+                @media (max-width: 768px) {
                     top: 20px;
                 }
-                @media (max-width: 425px){
+                @media (max-width: 425px) {
                     top: 21px;
                     margin-right: 0;
                 }
@@ -137,29 +136,29 @@ body {
                     opacity: 1;
 
                     @media screen {
-                        @media (max-width: 425px){
-                            margin-right: -40px;
+                        @media (max-width: 425px) {
                             margin-top: -3px;
+                            margin-right: -40px;
                         }
                     }
                 }
 
                 .article-close {
                     opacity: 0;
-                    pointer-events:none;
+                    pointer-events: none;
 
                     a {
                         cursor: default;
 
-                        span{
-                            font-size:24px;
+                        span {
+                            font-size: 24px;
                         }
                     }
 
                     @media screen {
-                        @media (max-width: 425px){
-                            margin-right: 30px;
+                        @media (max-width: 425px) {
                             margin-top: -14px;
+                            margin-right: 30px;
                         }
                     }
                 }
@@ -172,39 +171,39 @@ body {
         .transition(background-color @step-tran);
 
         section {
-            position: relative;
-            margin: 20% auto 0;
             width: 80%;
-            background-color: @color-body-back;
             min-height: 1%;
-            @tmp1: background-color @step-tran, margin @step-tran;
+            margin: 20% auto 0;
             .transition(@tmp1);
+            position: relative;
+            background-color: @color-body-back;
+            @tmp1: background-color @step-tran, margin @step-tran;
 
             @media screen {
-                @media (max-width: 320px){
+                @media (max-width: 320px) {
                     margin-top: 24%;
                 }
             }
 
             article {
-                position: relative;
                 z-index: 500;
+                position: relative;
                 text-align: center;
 
                 .title {
                     font-size: 30px;
-                    text-align: center;
-                    word-break: break-word;
-                    font-weight: normal;
                     cursor: pointer;
+                    text-align: center;
+                    font-weight: normal;
+                    word-break: break-word;
                 }
 
                 .post-meta {
-                    margin: 3px 0 60px 0;
-                    color: @color-show;
-                    font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
                     font-size: 12px;
                     text-align: center;
+                    color: @color-show;
+                    margin: 3px 0 60px 0;
+                    font-family: 'Monda', "PingFang SC", "Microsoft YaHei", sans-serif;
 
                     .post-time:before {
                         content: '发表于 ';
@@ -224,80 +223,80 @@ body {
                     text-align: left;
 
                     p {
-                        margin: 0 0 25px 0;
                         line-height: 2;
+                        margin: 0 0 25px 0;
                     }
                 }
 
-                .post-more-link button{
-                    border:1px solid @color-body - #111;
+                .post-more-link button {
                     border-radius: 2px;
                     background-color: @color-body-back;
+                    border: 1px solid @color-body - #111;
                 }
 
-                .post-more-link,footer {
+                .post-more-link, footer {
                     opacity: 1;
                     .transition(opacity @step-tran);
                 }
 
                 footer {
-                    margin: 80px auto 60px;
                     width: 8%;
+                    margin: 80px auto 60px;
                     border-top: 1px solid @color-show + #333;
                 }
 
                 &:last-child footer {
-                    display: none!important;
+                    display: none !important;
                 }
             }
         }
 
         .blurry-block {
             @media screen {
-                @media (max-width: 425px){
+                @media (max-width: 425px) {
                     margin-top: 24%;
                 }
-                @media (max-width: 320px){
+                @media (max-width: 320px) {
                     margin-top: 26%;
                 }
             }
 
-            .block-top,.block-bottom {
-                position: fixed;
+            .block-top, .block-bottom {
                 top: 0;
                 left: 0;
-                z-index: 800;
+                opacity: 1;
                 width: 100%;
+                z-index: 800;
                 height: 45px;
+                position: fixed;
                 margin-top: -45px;
+                pointer-events: none;
+                .transition(@tmp-back);
                 background-color: @color-body-back;
                 box-shadow: 0 48px 70px 100px @color-body-back;
-                opacity: 1;
-                pointer-events:none;
-                @tmp-back:opacity @step-tran,background-color @step-tran;
-                .transition(@tmp-back);
+                @tmp-back: opacity @step-tran, background-color @step-tran;
 
                 @media screen {
-                    @media (max-width: 425px){
-                        box-shadow: none;
-                        margin-top: 0;
+                    @media (max-width: 425px) {
                         height: 70px;
+                        margin-top: 0;
+                        box-shadow: none;
                     }
                 }
             }
 
             .block-bottom {
-                top: auto;
                 bottom: 0;
+                top: auto;
             }
         }
     }
 
     > footer {
-        position: fixed;
         bottom: 0;
-        z-index: 900;
         width: 100%;
+        z-index: 900;
+        position: fixed;
         text-align: center;
         color: @color-show;
         .transition(bottom @step-tran);
@@ -306,18 +305,18 @@ body {
     &.article {
         background-color: @color-article;
 
-        >header{
-            .logo{
+        > header {
+            .logo {
                 top: 0;
             }
 
             nav {
                 top: 30px;
                 > ul {
-                    .about{
+                    .about {
                         opacity: 0;
-                        pointer-events:none;
-                        a{
+                        pointer-events: none;
+                        a {
                             cursor: default;
                         }
                     }
@@ -340,13 +339,13 @@ body {
                 margin: 10px auto;
 
                 @media screen {
-                    @media (max-width: 1024px){
+                    @media (max-width: 1024px) {
                         margin: 77px auto;
                     }
                 }
 
-                article{
-                    .post-more-link,footer{
+                article {
+                    .post-more-link, footer {
                         opacity: 0;
                         cursor: default;
                     }
@@ -359,12 +358,20 @@ body {
                 opacity: 0;
 
                 @media screen {
-                    @media (max-width: 1024px){
+                    @media (max-width: 1024px) {
                         opacity: 1;
-                        box-shadow:none;
                         height: 77px;
                         margin-top: 0;
+                        box-shadow: none;
                         background-color: @color-article;
+                    }
+                }
+            }
+
+            .block-bottom {
+                @media screen {
+                    @media (max-width: 425px) {
+                        opacity: 0;
                     }
                 }
             }
@@ -375,8 +382,10 @@ body {
         }
     }
 
-    .loader-inner > div{
+    .loader-inner > div {
         border-bottom-color: @color-show;
         margin: 0 auto;
     }
 }
+
+@import "user";

@@ -34,7 +34,7 @@ var Web = {
     login: function (url) {
         Web.getLogin(function (user) {
             if (!user) {
-
+                $(".user>.login-box").removeClass("hide");
             } else {
                 location.href = url;
             }
