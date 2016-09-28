@@ -52,6 +52,22 @@ body {
             z-index: 1000;
             .transition(top @step-tran);
 
+            @media screen {
+                @media (max-width: 1440px){
+                    left: auto;
+                    margin-left: 20px;
+                }
+                @media (max-width: 1024px){
+                    top: 30px;
+                }
+                @media (max-width: 768px){
+                    top: 20px;
+                }
+                @media (max-width: 425px){
+                    top: 0;
+                }
+            }
+
             @font-face {
                 font-family: 'logo';
                 src: url('logo.ttf');
@@ -61,6 +77,12 @@ body {
                 font-family: logo, sans-serif;
                 font-size: 39px;
                 line-height: 58px;
+
+                @media screen {
+                    @media (max-width: 425px){
+                        line-height: 39px;
+                    }
+                }
             }
         }
 
@@ -83,6 +105,25 @@ body {
             line-height: 2.5em;
             .transition(top @step-tran);
 
+            @media screen {
+                @media (max-width: 1440px){
+                    left: auto;
+                    margin-left: auto;
+                    margin-right: 20px;
+                    right: 0;
+                }
+                @media (max-width: 1024px){
+                    top: 30px;
+                }
+                @media (max-width: 768px){
+                    top: 20px;
+                }
+                @media (max-width: 425px){
+                    top: 21px;
+                    margin-right: 0;
+                }
+            }
+
             > ul {
                 list-style-type: none;
 
@@ -94,13 +135,32 @@ body {
 
                 .about {
                     opacity: 1;
+
+                    @media screen {
+                        @media (max-width: 425px){
+                            margin-right: -40px;
+                            margin-top: -3px;
+                        }
+                    }
                 }
 
                 .article-close {
                     opacity: 0;
+                    pointer-events:none;
 
                     a {
                         cursor: default;
+
+                        span{
+                            font-size:24px;
+                        }
+                    }
+
+                    @media screen {
+                        @media (max-width: 425px){
+                            margin-right: 30px;
+                            margin-top: -14px;
+                        }
                     }
                 }
             }
@@ -119,6 +179,12 @@ body {
             min-height: 1%;
             @tmp1: background-color @step-tran, margin @step-tran;
             .transition(@tmp1);
+
+            @media screen {
+                @media (max-width: 320px){
+                    margin-top: 24%;
+                }
+            }
 
             article {
                 position: relative;
@@ -187,7 +253,7 @@ body {
         }
 
         .blurry-block {
-            .block-top {
+            .block-top,.block-bottom {
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -198,11 +264,20 @@ body {
                 background-color: @color-body-back;
                 box-shadow: 0 48px 70px 100px @color-body-back;
                 opacity: 1;
-                .transition(opacity @step-tran);
+                pointer-events:none;
+                @tmp-back:opacity @step-tran,background-color @step-tran;
+                .transition(@tmp-back);
+
+                @media screen {
+                    @media (max-width: 425px){
+                        box-shadow: none;
+                        margin-top: 0;
+                        height: 70px;
+                    }
+                }
             }
 
             .block-bottom {
-                &:extend(body .container .blurry-block .block-top);
                 top: auto;
                 bottom: 0;
             }
@@ -232,12 +307,14 @@ body {
                 > ul {
                     .about{
                         opacity: 0;
+                        pointer-events:none;
                         a{
                             cursor: default;
                         }
                     }
                     .article-close {
                         opacity: 1;
+                        pointer-events: auto;
                         a {
                             cursor: auto;
                         }
@@ -253,6 +330,12 @@ body {
                 background-color: @color-article;
                 margin: 10px auto;
 
+                @media screen {
+                    @media (max-width: 1024px){
+                        margin: 77px auto;
+                    }
+                }
+
                 article{
                     .post-more-link,footer{
                         opacity: 0;
@@ -265,6 +348,16 @@ body {
         .blurry-block {
             .block-top, .block-bottom {
                 opacity: 0;
+
+                @media screen {
+                    @media (max-width: 1024px){
+                        opacity: 1;
+                        box-shadow:none;
+                        height: 77px;
+                        margin-top: 0;
+                        background-color: @color-article;
+                    }
+                }
             }
         }
 
