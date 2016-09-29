@@ -25,13 +25,14 @@ CREATE TABLE web_users (
   header_image INT(11) UNSIGNED COMMENT '用户头像id url不存在时,使用默认头像路径与id拼接',
   last_login   TIMESTAMP                       NOT NULL DEFAULT current_timestamp
   COMMENT '用户最后登录时间\n由程序写入',
+  auth TINYINT(1) UNSIGNED DEFAULT 0 COMMENT '用户权限',
   UNIQUE KEY id(id),
   FOREIGN KEY (header_image) REFERENCES web_users_headers (id)
 )
   COMMENT '用户表';
 
-INSERT INTO web_users (id, username, email, password, header_image, last_login)
-  VALUE (1, 'admin', 'admin@admin.com', '1111111111111111111111111111111', 1, now());
+INSERT INTO web_users (id, username, email, password, header_image, last_login,auth)
+  VALUE (1, 'admin', 'admin@admin.com', '', 1, now(),255);
 
 CREATE TABLE web_articles (
   id              INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,

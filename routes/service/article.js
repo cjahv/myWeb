@@ -22,6 +22,9 @@ module.exports = {
         login:{
             user:function (req, res, next) {
                 res.send(req.session.user);
+            },
+            login:function (req, res, next) {
+                req
             }
         }
     }

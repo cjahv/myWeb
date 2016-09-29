@@ -34,6 +34,10 @@ a {
     outline: none !important;
 }
 
+@-ms-viewport {
+    width: device-width;
+}
+
 body {
     font-size: 14px;
     color: @color-body;
@@ -166,7 +170,7 @@ body {
         }
     }
 
-    .container {
+    >.container {
         background-color: @color-body-back;
         .transition(background-color @step-tran);
 
