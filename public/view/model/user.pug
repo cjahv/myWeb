@@ -1,9 +1,10 @@
 section.user
     .login-box.hide
-        form(action="select.login.login.json",method="post")
-            input.form-control(placeholder="用户名/邮箱")
+        form(action="select.login.login.json",method="post",id="login-form")
+            input.form-control(name="name",placeholder="用户名/邮箱")
             br
-            input.form-control(type="password",placeholder="密码")
+            input.form-control(type="password",name="pass",placeholder="密码")
             br
+            span.error-msg
             br
             button.btn.btn-success.btn-block 登陆

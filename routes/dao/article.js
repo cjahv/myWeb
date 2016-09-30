@@ -5,6 +5,11 @@ const $conn = require('../utils/dbConn');
 const cache = require("../utils/cache");
 
 module.exports = {
+    getUser:function (name,fn) {
+        $conn.select("select * from web_user where username = ? or email = ?",[name,name],function (data) {
+            fn(data);
+        })
+    },
     item: function (id, fn) {
         $conn.select("select id,title,content,click,create_datetime,discuss from web_articles where id = ?", [id], function (data) {
             if (data !== null) {

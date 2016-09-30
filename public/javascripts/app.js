@@ -33,13 +33,63 @@ var Web = {
     },
     login: function (url) {
         Web.getLogin(function (user) {
+            $("body>.container").addClass("hide");
             if (!user) {
                 $(".user>.login-box").removeClass("hide");
-                $("body>.container").addClass("hide");
+                var $loginForm = $("#login-form").ajaxForm({
+                    success: function (data) {
+                        if (data.error) {
+                            $loginForm.find(".error-msg").text(data.msg);
+                        } else {
+                            Cache.set("web:user", data.user);
+                            Web.loadView(url);
+                        }
+                    }
+                });
             } else {
-                location.href = url;
+                Web.loadView(url);
             }
         })
+    },
+    loadView: function (url) {
+        var view = Cache.get("web:view:exist:" + url);
+        if (!view) {
+            $.get(url, function (view) {
+                Cache.set("web:view:" + url, view);
+                Cache.set("web:view:exist:" + url, true);
+                Cache.set("web:view:id:index", function (value) {
+                    return value ? ++value : 1;
+                });
+                Web.drawView(url);
+            })
+        } else {
+            Web.drawView(url);
+        }
+    },
+    drawView: function (url) {
+        Cache.set("web:view:id:" + url, function (id) {
+            if (id) {
+                $("#view-" + id).removeClass("hide");
+                return id;
+            } else {
+                var view = Cache.get("web:view:" + url);
+                var idIndex = Cache.get("web:view:id:index");
+                $('<section id="view-' + idIndex + '" class="view view-model">').append(view).appendTo('body>.container');
+                if (view.charAt(0) === '/' && view.indexOf('//auto load this page\'s javascript') === 0) {
+                    var js = url.replace("/public", "/public/javascripts").replace(".html", ".js");
+                    var jsText = Cache.get("web:view:auto:load:js:" + js);
+                    if (jsText) {
+                        eval(jsText);
+                    } else {
+                        $.get(js, function (text) {
+                            Cache.set("web:view:auto:load:js:" + js, text);
+                            eval(text);
+                        }, "text")
+                    }
+                }
+                return idIndex;
+            }
+        });
     },
     changeUrl: function (url, search, title) {
         if (/^(https?:)?\/\/.*/.test(url))return;
@@ -89,6 +139,33 @@ var Web = {
             href += search;
         }
         window.history.pushState({}, title, href)
+    },
+    loadJss: function (jss, fn) {
+        var back_fn=fn;
+        if(jss.length!==undefined) {
+            var _j=[];
+            for (var i = 1; i < jss.length; i++) {
+                _j.push(jss[i]);
+            }
+            fn=function () {
+                Web.loadJss(_j, back_fn);
+            }
+        }
+        $.get(jss[0] || jss, fn);
+    },
+    loadCss:function (url) {
+        var head = document.getElementsByTagName("head")[0];
+        var children = head.children;
+        for (var i = 0; i < children.length; i++) {
+            if (children[i].tagName == "LINK" && children[i].href.indexOf(url) > 0) {
+                return;
+            }
+        }
+        var link = document.createElement('link');
+        link.type = 'text/css';
+        link.rel = 'stylesheet';
+        link.href = url;
+        head.appendChild(link);
     }
 };
 
@@ -98,6 +175,10 @@ var Cache = {
         return Cache._value[key];
     },
     set: function (key, value) {
-        return Cache._value[key] = value;
+        if (typeof value === "function") {
+            return Cache._value[key] = value.call(Cache._value, Cache._value[key]);
+        } else {
+            return Cache._value[key] = value;
+        }
     }
 };
